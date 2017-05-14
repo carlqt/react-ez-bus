@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+
+import NearbyStations from './containers/nearby_stations';
+import Navbar from './components/navbar';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+const App = (props) => {
+  return(
+    <div>
+      <Navbar />
+
+      <div className="container">
+        <div className="columns">
+          <div className="column col-3" />
+          <div className="column col-6">
+            <NearbyStations />
+          </div>
+          <div className="column col-3" />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
-    );
-  }
+    </div>
+  )
 }
 
-export default App;
+export default App
