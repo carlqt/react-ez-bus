@@ -18,11 +18,12 @@ class NearbyStations extends Component {
   }
 
   render() {
-    console.log(this.props.stations);
-    const { stations } = this.props
+    const { stations } = this.props;
     return(
       <div>
-        { stations.map((station) => { return <div key={station.BusStopCode}>{station.BusStopCode}</div> }) }
+        {
+          stations.map((station) => { return <div key={station.get("BusStopCode")}>{station.get("BusStopCode")}</div> })
+         }
       </div>
     );
   }
@@ -30,7 +31,7 @@ class NearbyStations extends Component {
 
 function mapStateToProps(state) {
   return {
-    stations: state.stations,
+    stations: state.stations.get("stations"),
   };
 }
 
