@@ -1,23 +1,73 @@
 import './station.css'
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from  'react-redux';
 
-const Station = (props) => {
-  const stationCode = props.station.get("BusStopCode");
-  const description = props.station.get("Description");
+import { fetchBusStationDetails } from '../../actions/stations.js';
 
-  return(
-    <div className="panel">
-      <div className="panel-body">
-        { `${stationCode} - ${description}` }
+class Station extends Component {
+  constructor(props) {
+    super(props);
+    this.renderPanelBody = this.renderPanelBody.bind(this);
+    this.toggle = this.toggle.bind(this);
+
+    this.state = {
+      active: false
+    }
+  }
+
+  renderPanelBody(buses) {
+    if (this.state.active) {
+      return(
+        <div className="panel-body" >
+          <hr/>
+          {buses.map(bus => <div key={bus}>{bus}</div>)}
+        </div>
+      );
+    }
+  }
+
+  toggle() {
+    const { stationCode } = this.props;
+    this.setState({active: !this.state.active});
+    this.props.fetchBusStationDetails(stationCode);
+  }
+
+  render() {
+    const { description, stationCode, buses } = this.props;
+
+    return(
+      <div className="panel">
+        <div className="panel-title text-center" onClick={() => this.toggle() }>
+          { `${stationCode} - ${description}` }
+        </div>
+
+        { this.renderPanelBody(buses) }
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 Station.propTypes = {
-  station: PropTypes.object.isRequired,
+  description: PropTypes.string.isRequired,
+  buses: PropTypes.object.isRequired,
+  stationCode: PropTypes.string.isRequired,
 }
 
-export default Station;
+function mapStateToProps(state) {
+  return {
+    apibuses: state.stationBuses.get("buses"),
+    loading: state.stations.get("loading"),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchBusStationDetails
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Station);
+

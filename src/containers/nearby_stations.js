@@ -8,6 +8,7 @@ import Station from '../components/nearby_stations/station';
 class NearbyStations extends Component {
   constructor(props) {
     super(props);
+    this.renderStations = this.renderStations.bind(this);
     let lat;
     let lng;
 
@@ -18,17 +19,26 @@ class NearbyStations extends Component {
     });
   }
 
-  render() {
+  renderStations() {
     const { stations } = this.props;
     return(
+      stations.map((station) => {
+        return(
+          <Station key={station.get("BusStopCode")}
+          stationCode={station.get("BusStopCode")}
+          description={station.get("Description")}
+          buses={station.get("Buses")} />
+        )
+      })
+    )
+
+  }
+
+  render() {
+    const { loading } = this.props;
+    return(
       <div>
-        {
-          stations.map((station) => {
-            return(
-              <Station key={station.get("BusStopCode")} station={station} />
-            )
-          })
-        }
+        { loading ? <div className="loading"/> : this.renderStations() }
       </div>
     );
   }
@@ -37,6 +47,7 @@ class NearbyStations extends Component {
 function mapStateToProps(state) {
   return {
     stations: state.stations.get("stations"),
+    loading: state.stations.get("loading"),
   };
 }
 
