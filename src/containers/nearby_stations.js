@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from  'react-redux';
 
 import { detectNearbyStations } from '../actions/stations.js';
+import Station from '../components/nearby_stations/station';
 
 class NearbyStations extends Component {
   constructor(props) {
@@ -21,9 +22,17 @@ class NearbyStations extends Component {
     const { stations } = this.props;
     return(
       <div>
-        {
-          stations.map((station) => { return <div key={station.get("BusStopCode")}>{station.get("BusStopCode")}</div> })
-         }
+        <ul>
+          {
+            stations.map((station) => {
+              return(
+                <li key={station.get("BusStopCode")}>
+                  <Station station={station} />
+                </li>
+              )
+            })
+          }
+        </ul>
       </div>
     );
   }
