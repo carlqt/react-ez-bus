@@ -8,6 +8,7 @@ const App = (props) => {
   return(
     <div>
       <Navbar />
+      <hr/>
 
       <div className="container">
         <div className="columns">

@@ -1,3 +1,5 @@
+import './station.css'
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,8 +8,10 @@ const Station = (props) => {
   const description = props.station.get("Description");
 
   return(
-    <div>
-      { `${stationCode} - ${description}` }
+    <div className="panel">
+      <div className="panel-body">
+        { `${stationCode} - ${description}` }
+      </div>
     </div>
   )
 }
