@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from  'react-redux';
 
-import { fetchBusStationDetails } from '../../actions/stations.js';
+import { fetchBusStationDetails } from '../../actions/stations';
+import Bus from './bus';
 
 class Station extends Component {
   constructor(props) {
@@ -18,12 +19,24 @@ class Station extends Component {
     }
   }
 
+  colorCode(bus) {
+    const arrivalTime = bus.getIn(["NextBus", "EstimatedArrival"]);
+    switch (true) {
+      case arrivalTime < 2:
+        return "success";
+      case arrivalTime <= 5:
+        return "warning";
+      default:
+        return "danger";
+    };
+  }
+
   renderPanelBody(buses) {
     if (this.state.active) {
       return(
         <div className="panel-body" >
           <hr/>
-          {buses.map(bus => <div key={bus}>{bus}</div>)}
+          {buses.map(bus => <Bus key={bus} bus={bus} color={this.colorCode(bus)} />)}
         </div>
       );
     }
@@ -36,7 +49,8 @@ class Station extends Component {
   }
 
   render() {
-    const { description, stationCode, buses } = this.props;
+    const { description, stationCode } = this.props;
+    const buses = this.props.stationBuses;
 
     return(
       <div className="panel">
@@ -58,7 +72,7 @@ Station.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    apibuses: state.stationBuses.get("buses"),
+    stationBuses: state.stationBuses.get("buses"),
     loading: state.stations.get("loading"),
   };
 }

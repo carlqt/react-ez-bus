@@ -1,0 +1,11 @@
+.btn-primary.success {
+  background: green !important;
+}
+
+.btn-primary.warning{
+  background: orange !important;
+}
+
+.btn-primary.danger {
+  background: red !important;
+}

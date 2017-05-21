@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { DETECTED_NEARBY_STATIONS, FETCH_BUS_STATION } from '../reducers/stations_reducer';
+import { DETECTED_NEARBY_STATIONS } from '../reducers/stations_reducer';
+import { FETCH_BUS_STATION } from '../reducers/station_reducer';
 
 const URL = "http://localhost:8000"
 
@@ -17,7 +18,7 @@ export function detectNearbyStations(lat, lng) {
 export function fetchBusStationDetails(stationCode) {
   return dispatch => {
     axios.get(`${URL}/station/${stationCode}/arrivals`)
-      .then(function(response) {
+      .then((response) => {
         dispatch({type: FETCH_BUS_STATION, payload: response.data});
       })
       .catch(function(response) {
