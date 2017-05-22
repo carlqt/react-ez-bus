@@ -47,8 +47,11 @@ class Station extends Component {
 
   toggle() {
     const { stationCode } = this.props;
+    if (!this.state.active) {
+      this.props.fetchBusStationDetails(stationCode);
+    }
+
     this.setState({active: !this.state.active});
-    this.props.fetchBusStationDetails(stationCode);
   }
 
   render() {
@@ -74,7 +77,6 @@ Station.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    stationBuses: state.stationBuses.get("buses"),
     stations: state.stations,
     loading: state.stations.get("loading"),
   };

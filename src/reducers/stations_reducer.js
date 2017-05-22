@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-const FETCH_BUS_STATION = 'FETCH_BUS_STATION';
+export const FETCH_BUS_STATION = 'FETCH_BUS_STATION';
 export const DETECTED_NEARBY_STATIONS = 'DETECTED_NEARBY_STATIONS';
 export const INITIAL_STATE = Immutable.fromJS({
   stations: [],

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { DETECTED_NEARBY_STATIONS } from '../reducers/stations_reducer';
-import { FETCH_BUS_STATION } from '../reducers/station_reducer';
+import { DETECTED_NEARBY_STATIONS, FETCH_BUS_STATION } from '../reducers/stations_reducer';
 
 const URL = "http://localhost:8000"
 
