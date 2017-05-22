@@ -31,8 +31,11 @@ class Station extends Component {
     };
   }
 
-  renderPanelBody(buses) {
+  renderPanelBody() {
     if (this.state.active) {
+      const { stationCode } = this.props;
+      const station = this.props.stations.get("stations").find(s => s.get("BusStopCode") === stationCode );
+      const buses = station.get("Buses");
       return(
         <div className="panel-body" >
           <hr/>
@@ -50,7 +53,6 @@ class Station extends Component {
 
   render() {
     const { description, stationCode } = this.props;
-    const buses = this.props.stationBuses;
 
     return(
       <div className="panel">
@@ -58,7 +60,7 @@ class Station extends Component {
           { `${stationCode} - ${description}` }
         </div>
 
-        { this.renderPanelBody(buses) }
+        { this.renderPanelBody() }
       </div>
     )
   }
@@ -73,6 +75,7 @@ Station.propTypes = {
 function mapStateToProps(state) {
   return {
     stationBuses: state.stationBuses.get("buses"),
+    stations: state.stations,
     loading: state.stations.get("loading"),
   };
 }

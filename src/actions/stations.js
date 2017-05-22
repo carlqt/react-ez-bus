@@ -19,7 +19,7 @@ export function fetchBusStationDetails(stationCode) {
   return dispatch => {
     axios.get(`${URL}/station/${stationCode}/arrivals`)
       .then((response) => {
-        dispatch({type: FETCH_BUS_STATION, payload: response.data});
+        dispatch({type: FETCH_BUS_STATION, payload: response.data, stationCode});
       })
       .catch(function(response) {
       })

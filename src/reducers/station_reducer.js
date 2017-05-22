@@ -10,7 +10,7 @@ const INITIAL_STATE = Immutable.fromJS({
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
-  case FETCH_BUS_STATION:
+  case "hshshs":
     action.payload.loading = false;
     return state.merge(action.payload)
   default:
