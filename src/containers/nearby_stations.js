@@ -27,7 +27,7 @@ class NearbyStations extends Component {
           <Station key={station.get("BusStopCode")}
           stationCode={station.get("BusStopCode")}
           description={station.get("Description")}
-          buses={station.get("Buses")} />
+          />
         )
       })
     )

@@ -28,7 +28,7 @@ class Station extends Component {
         return "warning";
       default:
         return "danger";
-    };
+    }
   }
 
   renderPanelBody() {
@@ -36,6 +36,7 @@ class Station extends Component {
       const { stationCode } = this.props;
       const station = this.props.stations.get("stations").find(s => s.get("BusStopCode") === stationCode );
       const buses = station.get("Buses");
+      if (buses === null) return null;
       return(
         <div className="panel-body" >
           <hr/>
@@ -71,7 +72,6 @@ class Station extends Component {
 
 Station.propTypes = {
   description: PropTypes.string.isRequired,
-  buses: PropTypes.object.isRequired,
   stationCode: PropTypes.string.isRequired,
 }
 

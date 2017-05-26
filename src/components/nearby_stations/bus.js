@@ -6,7 +6,10 @@ const Bus = ({bus, color}) => {
 
   const arrival = bus.getIn(["NextBus", "EstimatedArrival"]);
   const nextArrival = bus.getIn(["SubsequentBus", "EstimatedArrival"]);
-  const displayArrival = parseInt(arrival, 10) <= 0 ? "Arriving" : `${parseInt(arrival, 10)} minutes`
+
+  const displayArrival = (arrival) => {
+    return parseInt(arrival, 10) <= 0 ? "Arriving" : `${parseInt(arrival, 10)} minutes`
+  }
 
   return(
     <div className="container">
@@ -15,10 +18,10 @@ const Bus = ({bus, color}) => {
           <button className={`btn btn-action ${color} btn-lg btn-primary circle`}>{bus.get("ServiceNo")}</button>
         </div>
         <div className="column col-4">
-          {displayArrival}
+          {displayArrival(arrival)}
         </div>
         <div className="column col-4">
-          {`${parseInt(nextArrival, 10)} minutes`}
+          {displayArrival(nextArrival)}
         </div>
       </div>
     </div>
