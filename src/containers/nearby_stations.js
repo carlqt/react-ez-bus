@@ -31,7 +31,6 @@ class NearbyStations extends Component {
         )
       })
     )
-
   }
 
   render() {
