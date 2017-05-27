@@ -3,29 +3,53 @@ import { bindActionCreators } from 'redux';
 import { connect } from  'react-redux';
 
 import { allStations } from '../actions/stations.js';
-import Station from '../components/nearby_stations/station';
+import Paginate from '../components/paginate';
 
 class Stations extends Component {
   constructor(props) {
     super(props);
     this.renderStations = this.renderStations.bind(this);
+    this.getUrlParams = this.getUrlParams.bind(this);
+    this.getPage = this.getPage.bind(this);
   }
 
   componentWillMount() {
     this.props.allStations();
   }
 
+  getUrlParams = (search) => {
+    let hashes = search.slice(search.indexOf('?') + 1).split('&')
+    let params = {}
+    hashes.forEach(hash => {
+        let [key, val] = hash.split('=')
+        params[key] = decodeURIComponent(val)
+    })
+
+    return params;
+  }
+
+
+  getPage() {
+    let page = this.getUrlParams(this.props.location.search).page;
+    page = parseInt(page, 10) - 1;
+
+    if (page<= 0 || isNaN(page)) {
+      page = 0
+    };
+
+    return page
+  }
+
+
   renderStations() {
     const { stations } = this.props;
+    const size = 20;
+    const page = this.getPage();
+
     return(
-      stations.map((station) => {
-        return(
-          <Station key={station.get("BusStopCode")}
-          stationCode={station.get("BusStopCode")}
-          description={station.get("Description")}
-          />
-        )
-      })
+      <Paginate page={page} size={size}>
+        { stations }
+      </Paginate>
     )
   }
 
@@ -48,7 +72,7 @@ class Stations extends Component {
 
 function mapStateToProps(state) {
   return {
-    stations: state.stations.get("stations"),
+    stations: state.allStations.get("stations"),
     loading: state.stations.get("loading"),
   };
 }

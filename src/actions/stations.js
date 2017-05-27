@@ -3,7 +3,7 @@ import {
   DETECTED_NEARBY_STATIONS,
   FETCH_BUS_STATION,
   ALL_STATIONS
-} from '../reducers/stations_reducer';
+} from '../constants';
 
 const URL = "http://localhost:8000"
 

@@ -1,8 +1,7 @@
 import Immutable from 'immutable';
 
-export const FETCH_BUS_STATION = 'FETCH_BUS_STATION';
-export const DETECTED_NEARBY_STATIONS = 'DETECTED_NEARBY_STATIONS';
-export const ALL_STATIONS = 'ALL_STATIONS';
+import { FETCH_BUS_STATION, DETECTED_NEARBY_STATIONS } from '../constants';
+
 export const INITIAL_STATE = Immutable.fromJS({
   stations: [],
   errors: null,
@@ -17,9 +16,6 @@ export default function(state = INITIAL_STATE, action) {
   case FETCH_BUS_STATION:
     const i = state.get("stations").findIndex(s => s.get("BusStopCode") === action.stationCode );
     return state.mergeDeepIn(["stations", i], action.payload);
-  case ALL_STATIONS:
-    action.payload.loading = false;
-    return state.merge(action.payload);
   default:
     return state;
   }
