@@ -9,14 +9,13 @@ const Navbar = () => {
       <section className="navbar-section">
         <Link to="/" className="btn btn-link">Nearby</Link>
         <Link to="/stations" className="btn btn-link">Stations</Link>
-        <a href="#" className="btn btn-link">Buses</a>
       </section>
 
       <section className="navbar-center">
-        <div className="input-group input-inline">
+        {/*<div className="input-group input-inline">
           <input className="form-input" type="text" placeholder="search" />
           <button className="btn btn-primary input-group-btn">Search</button>
-        </div>
+        </div>*/}
       </section>
     </header>
   );
