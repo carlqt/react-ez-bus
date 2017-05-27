@@ -48,8 +48,10 @@ class Station extends Component {
 
   toggle() {
     const { stationCode } = this.props;
+    const { type } = this.props;
+
     if (!this.state.active) {
-      this.props.fetchBusStationDetails(stationCode);
+      this.props.fetchBusStationDetails(stationCode, type);
     }
 
     this.setState({active: !this.state.active});
@@ -75,9 +77,11 @@ Station.propTypes = {
   stationCode: PropTypes.string.isRequired,
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  const stations = ownProps.type == undefined ? state.stations : state.allStations;
+
   return {
-    stations: state.stations,
+    stations,
     loading: state.stations.get("loading"),
   };
 }

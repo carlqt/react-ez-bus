@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Station from './nearby_stations/station';
 import PageItem from './page_item';
+import { FETCH_BUS_ALL_STATION } from '../constants';
 
 class Paginate extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class Paginate extends Component {
               <Station key={station.get("BusStopCode")}
               stationCode={station.get("BusStopCode")}
               description={station.get("Description")}
+              type={FETCH_BUS_ALL_STATION}
               />
             )
           })

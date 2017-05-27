@@ -18,11 +18,11 @@ export function detectNearbyStations(lat, lng) {
   }
 }
 
-export function fetchBusStationDetails(stationCode) {
+export function fetchBusStationDetails(stationCode, type = FETCH_BUS_STATION) {
   return dispatch => {
     axios.get(`${URL}/station/${stationCode}/arrivals`)
       .then((response) => {
-        dispatch({type: FETCH_BUS_STATION, payload: response.data, stationCode});
+        dispatch({type, payload: response.data, stationCode});
       })
       .catch(function(response) {
       })
