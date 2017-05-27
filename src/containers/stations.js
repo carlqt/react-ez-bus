@@ -1,16 +1,13 @@
 import React from 'react';
 
-import NearbyStations from './containers/nearby_stations';
-import './App.css';
-
-const App = (props) => {
+const Stations = () => {
   return(
     <div>
       <div className="container">
         <div className="columns">
           <div className="column col-3" />
           <div className="column col-6">
-            <NearbyStations />
+            <div>Hello</div>
           </div>
           <div className="column col-3" />
         </div>
@@ -19,4 +16,4 @@ const App = (props) => {
   )
 }
 
-export default App
+export default Stations;

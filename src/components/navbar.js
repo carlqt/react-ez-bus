@@ -1,14 +1,14 @@
 import React from 'react';
 
-import './navbar.css'
-import 'spectre.css';
+import './navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return(
     <header className="navbar section-header">
       <section className="navbar-section">
-        <a href="#" className="navbar-brand mr-10">Nearby</a>
-        <a href="#" className="btn btn-link">Stations</a>
+        <Link to="/" className="btn btn-link">Nearby</Link>
+        <Link to="/stations" className="btn btn-link">Stations</Link>
         <a href="#" className="btn btn-link">Buses</a>
       </section>
 
