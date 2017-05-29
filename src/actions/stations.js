@@ -5,7 +5,7 @@ import {
   ALL_STATIONS
 } from '../constants';
 
-const URL = "http://localhost:8000"
+const URL = "/api"
 
 export function detectNearbyStations(lat, lng) {
   return dispatch => {
